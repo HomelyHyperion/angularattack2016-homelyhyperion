@@ -1,0 +1,124 @@
+/* Task List */
+.task-list {
+    padding-top: 40px;
+}
+.task-list .date {
+    text-align: center;
+    font-weight: bold;
+    float: left;
+    width: 100px;
+    font-size: 24px;
+    color: #666666;
+    background: #eeeeee;
+    padding-bottom: 30px;
+}
+.task-list .date .day {
+    font-size: 36px;
+}
+.task-list ul {
+    margin-left: 50px;
+    border-left: 1px solid #cccccc;
+}
+.task-list ul > li {
+    margin: 0 0 10px 50px;
+}
+.task-list .day-of-week {
+    margin: 0 0 10px;
+    color: #666666;
+    font-size: 21px;
+}
+
+/* Card */
+.card {
+    background: #ffffff;
+    height: 80px;
+    padding: 20px;
+    overflow: hidden;
+    position: relative;
+    border-top: 1px solid #f1f1f1;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.3);
+}
+.card .handle {
+    float: left;
+    cursor: move;
+    color: #333333;
+}
+.card .card-content {
+    position: relative;
+    height: 100%;
+    margin: 0 100px 0 30px;
+}
+.card .card-content .description {
+    color: #333333;
+    font-size: 16px;
+}
+.card .card-content .actions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.card .card-content .actions a {
+    margin-right: 20px;
+    font-size: 13px;
+}
+.card .counter {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 120px;
+    height: 120px;
+    text-align: center;
+    border-left: 1px solid #dddddd;
+    background: #f8f8f8;
+    color: #aaaaaa;
+}
+.card .counter .icon {
+    line-height: 80px;
+    height: 80px;
+}
+.card .counter .hours {
+    font-size: 36px;
+}
+.card:hover .counter .hours {
+    display: none;
+}
+.card .counter .play {
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+}
+.card:hover .counter .play {
+    height: 80px;
+    visibility: visible;
+    opacity: 1;
+}
+.card .counter .play i {
+    font-size: 60px;
+    cursor: pointer;
+    transition: color 0.5s ease;
+}
+.card .counter .play i:hover {
+    color: #e74c3c;
+}
+.card .counter .done {
+    font-size: 40px;
+}
+.card .counter .icon i {
+    line-height: 80px;
+    vertical-align: middle;
+}
+.card .counter .select-wrapper {
+    background-color: #eeeeee;
+    margin: 0 10px;
+}
+.card .counter .select-wrapper select {
+    color: #666666;
+    font-size: 13px;
+    cursor: pointer;
+}

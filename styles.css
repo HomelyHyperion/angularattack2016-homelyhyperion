@@ -47,6 +47,13 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+a {
+    color: #e74c3c;
+    text-decoration: none;
+}
+a:hover {
+    color: #c0392b;
+}
 b {
     font-weight: bold;
 }
