@@ -28,6 +28,10 @@ body {
     background: #eeeeee;
     line-height: 1;
 }
+.wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+}
 ol, ul {
     list-style: none;
 }
@@ -42,4 +46,64 @@ q:before, q:after {
 table {
     border-collapse: collapse;
     border-spacing: 0;
+}
+b {
+    font-weight: bold;
+}
+input[type="text"],
+input[type="number"] {
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+}
+input[type="number"] {
+     -moz-appearance: textfield;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+select {
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    padding: 5px 8px;
+    width: 120%;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+}
+select:focus {
+    outline: none;
+}
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}
+.select-wrapper {
+    border: 1px solid #cccccc;
+    overflow: hidden;
+    background: #fafafa url("images/arrowdown.png") no-repeat 94% 50%;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.btn {
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    border: none;
+    padding: 10px 20px;
+    font-size: 13px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 1s ease;
+}
+.btn-red {
+    background: #e74c3c;
+    color: #ffffff;
+}
+.btn-red:hover {
+    background: #c0392b;
 }
