@@ -2,6 +2,12 @@
 .task-list {
     padding-top: 40px;
 }
+.task-list .empty-message {
+    text-align: center;
+    color: #666666;
+    font-size: 16px;
+    line-height: 24px;
+}
 .task-list .date {
     text-align: center;
     font-weight: bold;

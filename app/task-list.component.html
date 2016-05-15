@@ -1,4 +1,7 @@
 <div class="task-list">
+	<div *ngIf="tasks.length == 0" class="empty-message">
+		Uh oh! Looks like you haven't got anything to focus on.<br />Start by adding something to do :)
+	</div>
 	<div class="section" *ngFor="let date of dates">
 		<div class="wrapper" *ngIf="checkHasTasks(date.day)">
 			<div class="date">
@@ -11,7 +14,7 @@
 					<div class="card">
 						<i class="fa fa-bars handle"></i>
 						<div class="card-content">
-							<div class="description">{{task.description}} {{task.day}}</div>
+							<div class="description">{{task.description}}</div>
 							<div class="actions">
 								<a href="#"><i class="fa fa-pencil"></i> Edit</a>
 								<a href="#"><i class="fa fa-trash-o"></i> Delete</a>
