@@ -39331,19 +39331,27 @@
 	var task_form_component_1 = __webpack_require__(282);
 	var task_list_component_1 = __webpack_require__(284);
 	var day_service_1 = __webpack_require__(283);
+	var task_service_1 = __webpack_require__(285);
 	var AppComponent = (function () {
-	    function AppComponent() {
+	    function AppComponent(_taskService) {
+	        this._taskService = _taskService;
 	        this.title = 'FocusTrack';
 	        this.tasks = [];
 	    }
+	    AppComponent.prototype.ngOnInit = function () {
+	        var tasks = this._taskService.getTasks();
+	        if (tasks != null) {
+	            this.tasks = tasks;
+	        }
+	    };
 	    AppComponent = __decorate([
 	        core_1.Component({
 	            selector: 'my-app',
 	            templateUrl: 'app/app.component.html',
 	            directives: [header_component_1.HeaderComponent, task_form_component_1.TaskFormComponent, task_list_component_1.TaskListComponent],
-	            providers: [day_service_1.DayService]
+	            providers: [day_service_1.DayService, task_service_1.TaskService]
 	        }), 
-	        __metadata('design:paramtypes', [])
+	        __metadata('design:paramtypes', [task_service_1.TaskService])
 	    ], AppComponent);
 	    return AppComponent;
 	}());
@@ -39408,7 +39416,7 @@
 	        this.max = 8;
 	    }
 	    TaskFormComponent.prototype.ngOnInit = function () {
-	        this.clearTask();
+	        this.initTask();
 	    };
 	    TaskFormComponent.prototype.stepUp = function () {
 	        if (this.newTask.counter < this.max) {
@@ -39429,8 +39437,11 @@
 	        this.clearTask();
 	        this.enableSortable();
 	    };
-	    TaskFormComponent.prototype.clearTask = function () {
+	    TaskFormComponent.prototype.initTask = function () {
 	        this.newTask = { description: '', counter: 1, day: '', status: 'To Do', timestamp: '' };
+	    };
+	    TaskFormComponent.prototype.clearTask = function () {
+	        this.newTask = { description: '', counter: this.newTask.counter, day: this.newTask.day, status: 'To Do', timestamp: '' };
 	    };
 	    TaskFormComponent.prototype.enableSortable = function () {
 	        $('.task-list ul').sortable({
@@ -39516,9 +39527,11 @@
 	};
 	var core_1 = __webpack_require__(7);
 	var day_service_1 = __webpack_require__(283);
+	var task_service_1 = __webpack_require__(285);
 	var TaskListComponent = (function () {
-	    function TaskListComponent(_dayService) {
+	    function TaskListComponent(_dayService, _taskService) {
 	        this._dayService = _dayService;
+	        this._taskService = _taskService;
 	    }
 	    TaskListComponent.prototype.ngOnInit = function () {
 	        this.dates = this._dayService.getDates();
@@ -39530,11 +39543,13 @@
 	        return this.tasks.filter(function (task) { return task.day == day; }).length > 0;
 	    };
 	    TaskListComponent.prototype.getTasks = function (day) {
+	        this._taskService.updateTasks(this.tasks);
 	        return this.tasks.filter(function (task) { return task.day == day; });
 	    };
 	    TaskListComponent.prototype.deleteTask = function (task) {
 	        var index = this.tasks.findIndex(function (x) { return x.timestamp == task.timestamp; });
 	        this.tasks.splice(index, 1);
+	        this._taskService.updateTasks(this.tasks);
 	    };
 	    TaskListComponent.prototype.enableSortable = function () {
 	        $('.task-list ul').sortable({
@@ -39551,12 +39566,45 @@
 	            templateUrl: 'app/task-list.component.html',
 	            styleUrls: ['app/task-list.component.css']
 	        }), 
-	        __metadata('design:paramtypes', [day_service_1.DayService])
+	        __metadata('design:paramtypes', [day_service_1.DayService, task_service_1.TaskService])
 	    ], TaskListComponent);
 	    return TaskListComponent;
 	}());
 	exports.TaskListComponent = TaskListComponent;
 	//# sourceMappingURL=task-list.component.js.map
+
+/***/ },
+/* 285 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(7);
+	var TaskService = (function () {
+	    function TaskService() {
+	    }
+	    TaskService.prototype.updateTasks = function (tasks) {
+	        localStorage.setItem('tasks', JSON.stringify(tasks));
+	    };
+	    TaskService.prototype.getTasks = function () {
+	        return JSON.parse(localStorage.getItem("tasks"));
+	    };
+	    TaskService = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [])
+	    ], TaskService);
+	    return TaskService;
+	}());
+	exports.TaskService = TaskService;
+	//# sourceMappingURL=task.service.js.map
 
 /***/ }
 /******/ ]);
