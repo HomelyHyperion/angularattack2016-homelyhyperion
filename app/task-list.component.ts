@@ -2,6 +2,7 @@ import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 import { Task } from './task';
 import { DayService } from './day.service';
 import { TaskService } from './task.service';
+import { SortableService } from './sortable.service';
 
 @Component({
     selector: 'task-list',
@@ -13,14 +14,15 @@ export class TaskListComponent implements OnInit, AfterViewInit {
     dates: any[];
 
     constructor(private _dayService: DayService,
-                private _taskService: TaskService) { }
+                private _taskService: TaskService,
+                private _sortableService: SortableService) { }
 
     ngOnInit() {
         this.dates = this._dayService.getDates();
     }
 
     ngAfterViewInit() {
-        this.enableSortable();
+        this._sortableService.enableSortable();
     }
 
     checkHasTasks(day: string) {
@@ -36,11 +38,5 @@ export class TaskListComponent implements OnInit, AfterViewInit {
         let index = this.tasks.findIndex(x => x.timestamp == task.timestamp);
         this.tasks.splice(index, 1);
         this._taskService.updateTasks(this.tasks);
-    }
-
-    private enableSortable() {
-        $('.task-list ul').sortable({
-            handle: '.handle'
-        });
     }
 }

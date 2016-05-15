@@ -5,12 +5,13 @@ import { TaskListComponent } from './task-list.component';
 import { Task } from './task';
 import { DayService } from './day.service';
 import { TaskService } from './task.service';
+import { SortableService } from './sortable.service';
 
 @Component({
     selector: 'my-app',
     templateUrl: 'app/app.component.html',
     directives: [HeaderComponent, TaskFormComponent, TaskListComponent],
-    providers: [DayService, TaskService]
+    providers: [DayService, TaskService, SortableService]
 })
 
 export class AppComponent implements OnInit {
