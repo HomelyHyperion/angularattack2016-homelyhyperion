@@ -14,10 +14,10 @@
 					<div class="card">
 						<i class="fa fa-bars handle"></i>
 						<div class="card-content">
-							<div class="description">{{task.description}}</div>
+							<input class="input-description" type="text" [(ngModel)]="task.description" #focusable />
 							<div class="actions">
-								<a href="#"><i class="fa fa-pencil"></i> Edit</a>
-								<a href="#" (click)="deleteTask(task)"><i class="fa fa-trash-o"></i> Delete</a>
+								<a href="javascript:void(0)" (click)="focusable.focus()"><i class="fa fa-pencil"></i> Edit</a>
+								<a href="javascript:void(0)" (click)="deleteTask(task)"><i class="fa fa-trash-o"></i> Delete</a>
 							</div>
 						</div>
 						<div class="counter">

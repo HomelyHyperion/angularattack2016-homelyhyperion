@@ -63,6 +63,13 @@
 .card .card-content .description {
     color: #333333;
     font-size: 16px;
+    line-height: 17px;
+}
+.card .card-content .input-description {
+    font-size: 16px;
+    color: #333333;
+    width: 98%;
+    border: none;
 }
 .card .card-content .actions {
     position: absolute;
