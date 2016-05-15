@@ -39329,9 +39329,10 @@
 	var core_1 = __webpack_require__(7);
 	var header_component_1 = __webpack_require__(281);
 	var task_form_component_1 = __webpack_require__(282);
-	var task_list_component_1 = __webpack_require__(284);
+	var task_list_component_1 = __webpack_require__(285);
 	var day_service_1 = __webpack_require__(283);
-	var task_service_1 = __webpack_require__(285);
+	var task_service_1 = __webpack_require__(286);
+	var sortable_service_1 = __webpack_require__(284);
 	var AppComponent = (function () {
 	    function AppComponent(_taskService) {
 	        this._taskService = _taskService;
@@ -39349,7 +39350,7 @@
 	            selector: 'my-app',
 	            templateUrl: 'app/app.component.html',
 	            directives: [header_component_1.HeaderComponent, task_form_component_1.TaskFormComponent, task_list_component_1.TaskListComponent],
-	            providers: [day_service_1.DayService, task_service_1.TaskService]
+	            providers: [day_service_1.DayService, task_service_1.TaskService, sortable_service_1.SortableService]
 	        }), 
 	        __metadata('design:paramtypes', [task_service_1.TaskService])
 	    ], AppComponent);
@@ -39409,9 +39410,11 @@
 	};
 	var core_1 = __webpack_require__(7);
 	var day_service_1 = __webpack_require__(283);
+	var sortable_service_1 = __webpack_require__(284);
 	var TaskFormComponent = (function () {
-	    function TaskFormComponent(_dayService) {
+	    function TaskFormComponent(_dayService, _sortableService) {
 	        this._dayService = _dayService;
+	        this._sortableService = _sortableService;
 	        this.min = 1;
 	        this.max = 8;
 	    }
@@ -39435,18 +39438,13 @@
 	        this.newTask.timestamp = new Date().toISOString();
 	        this.tasks.push(this.newTask);
 	        this.clearTask();
-	        this.enableSortable();
+	        this._sortableService.enableSortable();
 	    };
 	    TaskFormComponent.prototype.initTask = function () {
 	        this.newTask = { description: '', counter: 1, day: '', status: 'To Do', timestamp: '' };
 	    };
 	    TaskFormComponent.prototype.clearTask = function () {
 	        this.newTask = { description: '', counter: this.newTask.counter, day: this.newTask.day, status: 'To Do', timestamp: '' };
-	    };
-	    TaskFormComponent.prototype.enableSortable = function () {
-	        $('.task-list ul').sortable({
-	            handle: '.handle'
-	        });
 	    };
 	    __decorate([
 	        core_1.Input(), 
@@ -39458,7 +39456,7 @@
 	            templateUrl: 'app/task-form.component.html',
 	            styleUrls: ['app/task-form.component.css']
 	        }), 
-	        __metadata('design:paramtypes', [day_service_1.DayService])
+	        __metadata('design:paramtypes', [day_service_1.DayService, sortable_service_1.SortableService])
 	    ], TaskFormComponent);
 	    return TaskFormComponent;
 	}());
@@ -39526,35 +39524,64 @@
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(7);
+	var SortableService = (function () {
+	    function SortableService() {
+	    }
+	    SortableService.prototype.enableSortable = function () {
+	        $('.task-list ul').sortable({
+	            handle: '.handle'
+	        });
+	    };
+	    SortableService = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [])
+	    ], SortableService);
+	    return SortableService;
+	}());
+	exports.SortableService = SortableService;
+	//# sourceMappingURL=sortable.service.js.map
+
+/***/ },
+/* 285 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(7);
 	var day_service_1 = __webpack_require__(283);
-	var task_service_1 = __webpack_require__(285);
+	var task_service_1 = __webpack_require__(286);
+	var sortable_service_1 = __webpack_require__(284);
 	var TaskListComponent = (function () {
-	    function TaskListComponent(_dayService, _taskService) {
+	    function TaskListComponent(_dayService, _taskService, _sortableService) {
 	        this._dayService = _dayService;
 	        this._taskService = _taskService;
+	        this._sortableService = _sortableService;
 	    }
 	    TaskListComponent.prototype.ngOnInit = function () {
 	        this.dates = this._dayService.getDates();
 	    };
 	    TaskListComponent.prototype.ngAfterViewInit = function () {
-	        this.enableSortable();
+	        this._sortableService.enableSortable();
 	    };
 	    TaskListComponent.prototype.checkHasTasks = function (day) {
 	        return this.tasks.filter(function (task) { return task.day == day; }).length > 0;
 	    };
 	    TaskListComponent.prototype.getTasks = function (day) {
 	        this._taskService.updateTasks(this.tasks);
-	        return this.tasks.filter(function (task) { return task.day == day; });
+	        return this.tasks.filter(function (task) { return task.day == day; }).reverse();
 	    };
 	    TaskListComponent.prototype.deleteTask = function (task) {
 	        var index = this.tasks.findIndex(function (x) { return x.timestamp == task.timestamp; });
 	        this.tasks.splice(index, 1);
 	        this._taskService.updateTasks(this.tasks);
-	    };
-	    TaskListComponent.prototype.enableSortable = function () {
-	        $('.task-list ul').sortable({
-	            handle: '.handle'
-	        });
 	    };
 	    __decorate([
 	        core_1.Input(), 
@@ -39566,7 +39593,7 @@
 	            templateUrl: 'app/task-list.component.html',
 	            styleUrls: ['app/task-list.component.css']
 	        }), 
-	        __metadata('design:paramtypes', [day_service_1.DayService, task_service_1.TaskService])
+	        __metadata('design:paramtypes', [day_service_1.DayService, task_service_1.TaskService, sortable_service_1.SortableService])
 	    ], TaskListComponent);
 	    return TaskListComponent;
 	}());
@@ -39574,7 +39601,7 @@
 	//# sourceMappingURL=task-list.component.js.map
 
 /***/ },
-/* 285 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
