@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 import { Task } from './task';
 import { DayService } from './day.service';
 
@@ -7,7 +7,7 @@ import { DayService } from './day.service';
     templateUrl: 'app/task-list.component.html',
     styleUrls: ['app/task-list.component.css']
 })
-export class TaskListComponent implements OnInit {
+export class TaskListComponent implements OnInit, AfterViewInit {
     @Input() tasks: Task[];
     dates: any[];
 
@@ -17,11 +17,21 @@ export class TaskListComponent implements OnInit {
         this.dates = this._dayService.getDates();
     }
 
+    ngAfterViewInit() {
+        this.enableSortable();
+    }
+
     checkHasTasks(day: string) {
         return this.tasks.filter((task) => task.day == day).length > 0;
     }
     
     getTasks(day: string) {
         return this.tasks.filter((task) => task.day == day);
+    }
+
+    private enableSortable() {
+        $('.task-list ul').sortable({
+            handle: '.handle'
+        });
     }
 }

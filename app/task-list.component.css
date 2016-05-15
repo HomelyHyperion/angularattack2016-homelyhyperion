@@ -113,6 +113,17 @@
 .card .counter .play i:hover {
     color: #e74c3c;
 }
+.card .counter .timer {
+    font-size: 60px;
+    position: relative;
+}
+.card .counter .timer .hours-small {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 11px;
+    line-height: 11px;
+}
 .card .counter .done {
     font-size: 40px;
 }

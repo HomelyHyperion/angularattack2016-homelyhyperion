@@ -22,15 +22,16 @@
 						</div>
 						<div class="counter">
 							<div class="icon">
-								<div class="hours">{{task.counter}}h</div>
-								<div class="play"><i class="fa fa-play-circle"></i></div>
-								<!--div class="done"><i class="fa fa-check"></i></div-->
+								<div class="hours" *ngIf="task.status == 'To Do'">{{task.counter}}h</div>
+								<div class="play" *ngIf="task.status == 'To Do'" (click)="task.status='In Progress'"><i class="fa fa-play-circle"></i></div>
+								<div class="timer" *ngIf="task.status == 'In Progress'"><i class="fa fa-clock-o"></i><div class="hours-small">{{task.counter}}h</div></div>
+								<div class="done" *ngIf="task.status == 'Done'"><i class="fa fa-check"></i></div>
 							</div>
 							<div class="select-wrapper">
-								<select class="status">
-									<option>To Do</option>
-									<option>In Progress</option>
-									<option>Done</option>
+								<select class="status" [(ngModel)]="task.status">
+									<option value="To Do">To Do</option>
+									<option value="In Progress">In Progress</option>
+									<option value="Done">Done</option>
 								</select>
 							</div>
 						</div>

@@ -114,3 +114,6 @@ select:-moz-focusring {
 .btn-red:hover {
     background: #c0392b;
 }
+.section {
+    margin-bottom: 20px;
+}

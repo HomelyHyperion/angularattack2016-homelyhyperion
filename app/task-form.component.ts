@@ -36,9 +36,16 @@ export class TaskFormComponent implements OnInit {
         }
         this.tasks.push(this.newTask);
         this.clearTask();
+        this.enableSortable();
     }
 
     private clearTask() {
-        this.newTask = {description: '', counter: 1, day: '', status: 'todo'};
+        this.newTask = {description: '', counter: 1, day: '', status: 'To Do'};
+    }
+
+    private enableSortable() {
+        $('.task-list ul').sortable({
+            handle: '.handle'
+        });
     }
 }
