@@ -29,6 +29,11 @@ export class TaskListComponent implements OnInit, AfterViewInit {
         return this.tasks.filter((task) => task.day == day);
     }
 
+    deleteTask(task: Task) {
+        let index = this.tasks.findIndex(x => x.timestamp == task.timestamp);
+        this.tasks.splice(index, 1);
+    }
+
     private enableSortable() {
         $('.task-list ul').sortable({
             handle: '.handle'

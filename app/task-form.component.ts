@@ -34,13 +34,14 @@ export class TaskFormComponent implements OnInit {
         if(this.newTask.day == '') {
             this.newTask.day = this._dayService.getToday();
         }
+        this.newTask.timestamp = new Date().toISOString ();
         this.tasks.push(this.newTask);
         this.clearTask();
         this.enableSortable();
     }
 
     private clearTask() {
-        this.newTask = {description: '', counter: 1, day: '', status: 'To Do'};
+        this.newTask = {description: '', counter: 1, day: '', status: 'To Do', timestamp: ''};
     }
 
     private enableSortable() {

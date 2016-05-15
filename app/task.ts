@@ -3,4 +3,5 @@ export class Task {
     counter: number;
     day: string;
     status: string;
+    timestamp: string;
 }
