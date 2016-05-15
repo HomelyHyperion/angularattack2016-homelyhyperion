@@ -9,11 +9,11 @@ import { DayService } from './day.service';
 })
 export class TaskListComponent implements OnInit {
     @Input() tasks: Task[];
-    weekday : string[];
+    dates: any[];
 
     constructor(private _dayService: DayService) { }
 
     ngOnInit() {
-        this.weekday = this._dayService.getSortedWeekday();
+        this.dates = this._dayService.getDates();
     }
 }
