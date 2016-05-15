@@ -34,14 +34,11 @@ export class TaskFormComponent implements OnInit {
         if(this.newTask.day == '') {
             this.newTask.day = this._dayService.getToday();
         }
-
         this.tasks.push(this.newTask);
         this.clearTask();
-
-        alert('Successfully added new task! :)');
     }
 
     private clearTask() {
-        this.newTask = {description: '', counter: 1, day: ''};
+        this.newTask = {description: '', counter: 1, day: '', status: 'todo'};
     }
 }

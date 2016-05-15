@@ -16,4 +16,12 @@ export class TaskListComponent implements OnInit {
     ngOnInit() {
         this.dates = this._dayService.getDates();
     }
+
+    checkHasTasks(day: string) {
+        return this.tasks.filter((task) => task.day == day).length > 0;
+    }
+    
+    getTasks(day: string) {
+        return this.tasks.filter((task) => task.day == day);
+    }
 }
