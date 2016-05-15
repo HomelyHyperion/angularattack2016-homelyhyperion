@@ -3,27 +3,27 @@
         <h2 class="question">What <b>things</b> do you need to do?</h2>
         <div class="entry">
             <div class="text-wrapper">
-                <input type="text" placeholder="e.g. Breakfast at Tiffany's"  class="input-task" />
+                <input type="text" placeholder="e.g. Breakfast at Tiffany's" [(ngModel)]="newTask.description" class="input-task" />
             </div>
             <div class="counter">
                 <div class="arrow" (click)="stepUp()"><i class="fa fa-chevron-up arrow-icon"></i></div>
-                <input type="number" [(ngModel)]="counter" [min]="min" [max]="max" class="input-hours" />
+                <input type="number" [(ngModel)]="newTask.counter" [min]="min" [max]="max" class="input-hours" />
                 <div class="arrow" (click)="stepDown()"><i class="fa fa-chevron-down arrow-icon"></i></div>
             </div>
         </div>
         <div class="select-wrapper">
-            <select class="frequency">
+            <select class="frequency" [(ngModel)]="newTask.frequency">
                 <option>Today</option>
                 <option disabled="">----------------</option>
-                <option>Monday</option>
-                <option>Tuesday</option>
-                <option>Wednesday</option>
-                <option>Thursday</option>
-                <option>Friday</option>
-                <option>Saturday</option>
-                <option>Sunday</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
             </select>
         </div>
-        <input type="submit" value="Add Task" class="btn btn-red" />
+        <input type="submit" (click)="addTask()" value="Add Task" class="btn btn-red" />
     </div>
 </form>

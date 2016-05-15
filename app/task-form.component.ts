@@ -1,24 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Task } from './task';
 
 @Component({
     selector: 'task-form',
     templateUrl: 'app/task-form.component.html',
     styleUrls: ['app/task-form.component.css']
 })
-export class TaskFormComponent {
+export class TaskFormComponent implements OnInit {
     min = 1;
     max = 8;
-    counter = 1;
+    newTask: Task;
 
+    ngOnInit() {
+        this.newTask = {description: '', counter: 1, frequency: 'Today'};
+    }
+    
     stepUp() {
-        if(this.counter < this.max) {
-            this.counter++;
+        if(this.newTask.counter < this.max) {
+            this.newTask.counter++;
         }
     }
 
     stepDown() {
-        if(this.counter > this.min) {
-            this.counter--;
+        if(this.newTask.counter > this.min) {
+            this.newTask.counter--;
         }
+    }
+    
+    addTask() {
+        console.log(this.newTask);
     }
 }
