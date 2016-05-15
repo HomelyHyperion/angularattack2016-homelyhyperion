@@ -31,7 +31,7 @@ export class TaskListComponent implements OnInit, AfterViewInit {
     
     getTasks(day: string) {
         this._taskService.updateTasks(this.tasks);
-        return this.tasks.filter((task) => task.day == day);
+        return this.tasks.filter((task) => task.day == day).reverse();
     }
 
     deleteTask(task: Task) {
