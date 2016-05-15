@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Task } from './task';
+import { DayService } from './day.service';
 
 @Component({
     selector: 'task-form',
@@ -10,6 +11,8 @@ export class TaskFormComponent implements OnInit {
     @Input() tasks: Task[];
     newTask: Task;
     min = 1; max = 8;
+
+    constructor(private _dayService: DayService) { }
 
     ngOnInit() {
         this.clearTask();
@@ -29,22 +32,16 @@ export class TaskFormComponent implements OnInit {
     
     addTask() {
         if(this.newTask.day == '') {
-            this.newTask.day = this.getToday();
+            this.newTask.day = this._dayService.getToday();
         }
 
         this.tasks.push(this.newTask);
         this.clearTask();
-        console.log(this.tasks);
+
+        alert('Successfully added new task! :)');
     }
 
     private clearTask() {
         this.newTask = {description: '', counter: 1, day: ''};
-    }
-
-    private getToday() {
-        var weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        var d = new Date();
-
-        return  weekday[d.getDay()];
     }
 }
