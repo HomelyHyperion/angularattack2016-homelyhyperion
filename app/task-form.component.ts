@@ -15,7 +15,7 @@ export class TaskFormComponent implements OnInit {
     constructor(private _dayService: DayService) { }
 
     ngOnInit() {
-        this.clearTask();
+        this.initTask();
     }
     
     stepUp() {
@@ -40,8 +40,12 @@ export class TaskFormComponent implements OnInit {
         this.enableSortable();
     }
 
-    private clearTask() {
+    private initTask() {
         this.newTask = {description: '', counter: 1, day: '', status: 'To Do', timestamp: ''};
+    }
+
+    private clearTask() {
+        this.newTask = {description: '', counter: this.newTask.counter, day: this.newTask.day, status: 'To Do', timestamp: ''};
     }
 
     private enableSortable() {
