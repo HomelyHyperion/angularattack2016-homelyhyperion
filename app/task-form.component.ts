@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Task } from './task';
 
 @Component({
@@ -7,12 +7,12 @@ import { Task } from './task';
     styleUrls: ['app/task-form.component.css']
 })
 export class TaskFormComponent implements OnInit {
-    min = 1;
-    max = 8;
+    @Input() tasks: Task[];
     newTask: Task;
+    min = 1; max = 8;
 
     ngOnInit() {
-        this.newTask = {description: '', counter: 1, frequency: 'Today'};
+        this.clearTask();
     }
     
     stepUp() {
@@ -28,6 +28,23 @@ export class TaskFormComponent implements OnInit {
     }
     
     addTask() {
-        console.log(this.newTask);
+        if(this.newTask.day == '') {
+            this.newTask.day = this.getToday();
+        }
+
+        this.tasks.push(this.newTask);
+        this.clearTask();
+        console.log(this.tasks);
+    }
+
+    private clearTask() {
+        this.newTask = {description: '', counter: 1, day: ''};
+    }
+
+    private getToday() {
+        var weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        var d = new Date();
+
+        return  weekday[d.getDay()];
     }
 }

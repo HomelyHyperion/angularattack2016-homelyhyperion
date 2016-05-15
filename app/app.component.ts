@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HeaderComponent } from './header.component';
 import { TaskFormComponent } from './task-form.component';
 import { TaskListComponent } from './task-list.component';
+import { Task } from './task';
 
 @Component({
     selector: 'my-app',
@@ -11,4 +12,5 @@ import { TaskListComponent } from './task-list.component';
 
 export class AppComponent {
     title = 'FocusTrack';
+    tasks: Task[] = [];
 }
